@@ -18,7 +18,7 @@ SetConsoleTextAttribute(hConsole, 15); //to here, declarations required for colo
   {
 case 1:
     {
-      limit=15;  //upper limit
+      limit=10;  //upper limit
       number=rand()%limit;  //generates a number up to the previous limit
 
       break;
