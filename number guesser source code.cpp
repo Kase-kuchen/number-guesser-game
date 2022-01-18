@@ -1,10 +1,15 @@
 #include <iostream>
 #include <windows.h>
 #include <conio.h>
+#include <random>
+#include <ctime>
+#include <vector>
 using namespace std;
 //libraries used above
 void Game(int choice,int tries) //this is the function of the game
 {
+    std::mt19937 engine{std::random_device{}()};
+
 HANDLE  hConsole;    //from here
 hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 FlushConsoleInputBuffer(hConsole);
@@ -19,35 +24,39 @@ SetConsoleTextAttribute(hConsole, 15); //to here, declarations required for colo
 case 1:
     {
       limit=10;  //upper limit
-      number=rand()%limit;  //generates a number up to the previous limit
-
+      std::uniform_int_distribution<int> randomnumber{0, 10};  //generates a number up to the  limit
+      number=randomnumber(engine);
       break;
     }
     case 2:
     {
       limit=50;
-      number=rand()%limit;
+     std::uniform_int_distribution<int> randomnumber{0, 50};  //generates a number up to the  limit
+      number=randomnumber(engine);
 
       break;
     }
     case 3:
     {
       limit=100;
-      number=rand()%limit;
+      std::uniform_int_distribution<int> randomnumber{0, 100};  //generates a number up to the  limit
+      number=randomnumber(engine);
 
       break;
     }
     case 4:
     {
       limit=500;
-    number=rand()%limit;
+    std::uniform_int_distribution<int> randomnumber{0, 500};  //generates a number up to the  limit
+      number=randomnumber(engine);
 
       break;
     }
     case 5:
     {
       limit=2147483647; //int limit
-    number=rand()%limit;
+    std::uniform_int_distribution<int> randomnumber{0, 2147483647};  //generates a number up to the  limit
+      number=randomnumber(engine);
 
       break;
     }
@@ -56,7 +65,7 @@ case 1:
 
   for(int i=1;i<=limit;i++) //you get to try until you get to the limit
   {
-   cout<<"You guess the number to be..."; cin>>guess; //main part of the game, where the player chooses a number
+   cout<<endl<<"You guess the number to be..."; cin>>guess; //main part of the game, where the player chooses a number
 
    if(guess==number)  //if the guess and the numbers match
         {
@@ -138,14 +147,17 @@ case 1:
 }
 int main()
 {
+    //NOTE 1.0 Choosing added difficulty function removed temporarely [forever if I forget about this program] due to massive bugs and incorrectly implemented features, the compiler made some text that really scared me
     bool ProgramRunning=true;  //this variable makes the program run
-    int choice,tries=100000,difficulty,col; //declaration of variables
+    int choice,tries=100000,col; //declaration of variables
+    string difficultychoice;
 
     HANDLE  hConsole;  //from here
     hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     FlushConsoleInputBuffer(hConsole);
     SetConsoleTextAttribute(hConsole, 15);//to here is the colored text declaration part
 
+    //vector<string> difficulty{"Yes","1","Yeah","Ja","Ok","Si","Da","Y","YES","yes","mkay","sure","yesn't"}; //pre-defined replies for the future question of whether the user wants added difficulty
     while(ProgramRunning==true)  // heart of the program
     {
 
@@ -182,50 +194,55 @@ int main()
         {
       case 1:
         {
+            /*
          cout<<endl;
-         cout<<"[1] Do you want to play with bonus difficulty? [Default: 15 tries]"<<endl<<"Press any other key to continue with infinite tries."<<endl;
-         cin>>difficulty; //allows the player to select whether they want added difficulty or not
+         cout<<" Do you want to play with bonus difficulty? [Default: 15 tries]"<<endl;
+         cin>>difficultychoice; //allows the player to select whether they want added difficulty or not
          cout<<endl;
-
-         if(difficulty==1)
-            tries=15;
+         for(int k=1;k<=strlen(difficulty);k++)
+         if(difficulty==difficultychoice)
+            tries=15; */
 
         Game(choice,tries); //calls the game function with the respective parameters
         break;
         }
       case 2:
-        {
+        { /*
          cout<<"[1] Do you want to play with bonus difficulty? [Default: 10 tries]"<<endl<<"Press any other key to continue with infinite tries."<<endl;
          cin>>difficulty;
          cout<<endl;
 
-         if(difficulty==1)
-            tries=10;
+         for(int k=1;k<=strlen(difficulty);k++)
+         if(difficulty==difficultychoice)
+            tries=10; */
+
 
         Game(choice,tries); //calls the game function with the respective parameters
         break;
         }
       case 3:
-        {
+        { /*
          cout<<"[1] Do you want to play with bonus difficulty? [Default: 7 tries]"<<endl<<"Press any other key to continue with infinite tries."<<endl;
          cin>>difficulty;
          cout<<endl;
 
-         if(difficulty==1)
-            tries=7;
+         for(int k=1;k<=strlen(difficulty);k++)
+         if(difficulty==difficultychoice)
+            tries=7; */
 
         Game(choice,tries); //calls the game function with the respective parameters
         break;
         }
       case 4:
-        {
+        { /*
          cout<<"[1] Do you want to play with bonus difficulty? [Default: 3 tries]"<<endl<<"Press any other key to continue with infinite tries."<<endl;
          cin>>difficulty;
          cout<<endl;
 
-         if(difficulty==1)
+        for(int k=1;k<=strlen(difficulty);k++)
+         if(difficulty==difficultychoice)
             tries=3;
-
+        */
         Game(choice,tries); //calls the game function with the respective parameters
         break;
         }
